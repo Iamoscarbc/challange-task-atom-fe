@@ -20,7 +20,11 @@ import { merge } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
-  readonly email = new FormControl('', [Validators.required, Validators.email]);
+  readonly email = new FormControl('', [
+    Validators.required,
+    Validators.email,
+    Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+  ]);
   errorMessage: string | null = 'Campo requerido';
 
   constructor(
