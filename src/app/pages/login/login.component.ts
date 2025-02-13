@@ -11,6 +11,8 @@ import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import { merge } from 'rxjs';
 
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -19,9 +21,6 @@ import { merge } from 'rxjs';
   imports: [MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule, CommonModule, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
-const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
 export class LoginComponent {
   readonly email = new FormControl('', {
     validators: [Validators.required, Validators.pattern(emailPattern)],
