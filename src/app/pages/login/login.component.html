@@ -6,7 +6,7 @@
       <input 
         matInput
         [formControl]="email"
-        (blur)="updateErrorMessage()"
+        (input)="updateErrorMessage()"
         required>
         @if (email.invalid) {
           <mat-error>{{errorMessage}}</mat-error>
