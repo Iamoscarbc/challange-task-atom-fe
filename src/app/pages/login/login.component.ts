@@ -19,11 +19,14 @@ import { merge } from 'rxjs';
   imports: [MatInputModule, MatButtonModule, FormsModule, ReactiveFormsModule, CommonModule, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
+const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export class LoginComponent {
-  readonly email = new FormControl('', [
-    Validators.required,
-    Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
-  ]);
+  readonly email = new FormControl('', {
+    validators: [Validators.required, Validators.pattern(emailPattern)],
+    updateOn: 'change'
+  });
   errorMessage: string | null = 'Campo requerido';
 
   constructor(
@@ -60,7 +63,6 @@ export class LoginComponent {
       },
       (error) => {
         console.error("error", error);
-        this.errorMessage = error.error.message;
         this.openDialog()
       }
     )
@@ -81,7 +83,6 @@ export class LoginComponent {
             this.login()
           },
           (error) => {
-            this.errorMessage = 'Error al crear usuario'
             console.error(error);
           }
         )
