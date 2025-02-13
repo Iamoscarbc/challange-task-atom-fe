@@ -12,7 +12,7 @@
           <mat-error>{{errorMessage}}</mat-error>
         }
       <button
-        [disabled]="!!errorMessage"
+        [disabled]="email.invalid"
         mat-icon-button
         matSuffix
       >
